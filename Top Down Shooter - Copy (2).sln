@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{FBC01459-16E8-479D-2A3C-FCD1A06C8E56}") = "Top Down Shooter - Copy (2)", "Assembly-CSharp.csproj", "{48789878-4B72-4A75-4DFA-75CD20107D8D}"
+EndProject
+Project("{FBC01459-16E8-479D-2A3C-FCD1A06C8E56}") = "Top Down Shooter - Copy (2)", "Assembly-UnityScript.unityproj", "{51296FA8-F3C9-FBE2-54FD-4133A90E658C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{48789878-4B72-4A75-4DFA-75CD20107D8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48789878-4B72-4A75-4DFA-75CD20107D8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48789878-4B72-4A75-4DFA-75CD20107D8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48789878-4B72-4A75-4DFA-75CD20107D8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51296FA8-F3C9-FBE2-54FD-4133A90E658C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51296FA8-F3C9-FBE2-54FD-4133A90E658C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51296FA8-F3C9-FBE2-54FD-4133A90E658C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51296FA8-F3C9-FBE2-54FD-4133A90E658C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
