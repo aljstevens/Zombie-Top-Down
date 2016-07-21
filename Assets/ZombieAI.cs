@@ -26,32 +26,6 @@ public class ZombieAI : MonoBehaviour {
 	void Update () 
 	{
 
-//		if (Physics.Linecast (transform.position, Player.transform.position) == false)
-//		{
-//			LOS = true;
-//		}
-//
-//		if (Physics.Linecast (transform.position, Player.transform.position))
-//		{
-//			LOS = false;
-//		}
-
-//		if (Target != null) 
-//		{
-//			if (Physics.Linecast (transform.position, Target.transform.position) == false)
-//			{
-//				LOS = true;
-//			}
-//		}
-//
-//		if (Target != null) 
-//		{
-//			if (Physics.Linecast (transform.position, Target.transform.position)) 
-//			{
-//				LOS = false;
-//			}
-//		}
-
 		if (enemyhealth.Health <= 0) 
 		{
 			agent.enabled = false;
@@ -59,6 +33,17 @@ public class ZombieAI : MonoBehaviour {
 
 		if (enemyhealth.Health >= 0)
 		{
+			if (Target != null) 
+			{
+				transform.LookAt (Target.transform);
+			}
+
+			if (Target != null && Target.tag == ("Killed")) 
+			{
+				Target = null;
+				agent.enabled = true;
+			}
+
 			if (Target != null && agent.enabled == true) 
 			{
 				agent.SetDestination (Target.transform.position);
@@ -76,7 +61,8 @@ public class ZombieAI : MonoBehaviour {
 			}
 
 
-			if (Walk == true) {
+			if (Walk == true) 
+			{
 				anim.SetTrigger ("Walk");
 				Walk = false;
 			}	
@@ -118,6 +104,22 @@ public class ZombieAI : MonoBehaviour {
 
 			}
 		}
+
+		if (enemyhealth.Health >= 0)
+		{
+			if (Target == null && other.gameObject.tag == ("Soldier") && (Physics.Linecast (transform.position, other.gameObject.transform.position) == false))
+			{
+				Target = other.gameObject;
+				Walk = true;
+				Rally.SetActive (true);
+			}
+			if (OtherZombie == null && other.gameObject.tag == ("Rally"))
+			{
+				ZombieTemp = other.gameObject;
+				OtherZombie = ZombieTemp.transform.parent.gameObject;
+
+			}
+		}
 	}
 
 	void OnTriggerStay (Collider other)
@@ -125,6 +127,16 @@ public class ZombieAI : MonoBehaviour {
 		if (enemyhealth.Health >= 0)
 		{
 			if (Target == null && other.gameObject.tag == ("Player") && (Physics.Linecast (transform.position, other.gameObject.transform.position) == false))
+			{
+				Target = other.gameObject;
+				Walk = true;
+			}
+
+		}
+
+		if (enemyhealth.Health >= 0)
+		{
+			if (Target == null && other.gameObject.tag == ("Soldier") && (Physics.Linecast (transform.position, other.gameObject.transform.position) == false))
 			{
 				Target = other.gameObject;
 				Walk = true;

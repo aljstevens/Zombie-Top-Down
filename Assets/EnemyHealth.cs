@@ -22,8 +22,7 @@ public class EnemyHealth : MonoBehaviour {
 		if (Health <= 0) 
 		{
 			Killed = true;
-			//Destroy (transform.parent.gameObject);
-			//anim.SetTrigger ("Killed");
+			gameObject.tag = ("Killed");
 		}
 
 		if (Killed == true && Used == false)

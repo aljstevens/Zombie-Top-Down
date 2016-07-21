@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{936031A0-3CB9-9D0A-E7A3-F0BD32411551}</ProjectGuid>
+    <ProjectGuid>{B21F58BC-0C7F-FF19-1CB1-E44D388AA15C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -54,6 +54,7 @@
      <Compile Include="Assets\AttackPlayer.cs" />
      <Compile Include="Assets\EnemyHealth.cs" />
      <Compile Include="Assets\Hit.cs" />
+     <Compile Include="Assets\Killed.cs" />
      <Compile Include="Assets\Other Attempt\AIAggro.cs" />
      <Compile Include="Assets\Other Attempt\AgentMover.cs" />
      <Compile Include="Assets\Other Attempt\BulletImpact.cs" />
@@ -77,6 +78,8 @@
      <Compile Include="Assets\Other Attempt\WayTooClose1.cs" />
      <Compile Include="Assets\Other Attempt\Yep.cs" />
      <Compile Include="Assets\PlayerHealth.cs" />
+     <Compile Include="Assets\SoldierAI.cs" />
+     <Compile Include="Assets\SoldierHealth.cs" />
      <Compile Include="Assets\UltraReal\UltraRealTools\Scripts\AbstractBases\UltraRealMonobehaviorBase.cs" />
      <Compile Include="Assets\UltraReal\UltraRealTools\Scripts\Input\MouseJoystick.cs" />
      <Compile Include="Assets\UltraReal\UltraRealTools\Scripts\Utility\CurserControl.cs" />

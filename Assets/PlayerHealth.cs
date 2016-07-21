@@ -28,7 +28,8 @@ public class PlayerHealth : MonoBehaviour {
 	{
 		if (other.gameObject.tag == ("AttackRange"))
 		{
-			PlayerHP -= 5f;
+//			PlayerHP -= 5f;
+//			Debug.Log ("Ouchy");
 		}
 	}
 }
