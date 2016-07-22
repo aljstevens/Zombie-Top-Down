@@ -23,19 +23,22 @@ public class SoldierAI : MonoBehaviour {
 	void Update ()
 	{
 		if (soldierhealth.SoldierHP >= 0) {
-			if (Target != null) {
+			if (Target != null) 
+			{
 				transform.LookAt (Target.transform);
 				ShootTime -= Time.deltaTime;
 			}
 
-			if (Target != null && ShootTime <= 0) {
+			if (Target != null && ShootTime <= 0  && (Physics.Linecast (transform.position, Target.gameObject.transform.position) == false)) 
+			{
 				localOffset = new Vector3 (Random.Range (-1, 1), 0, 0);
 				Instantiate (Flash, Barrel.transform.position, Barrel.transform.rotation);
 				Instantiate (ShootingImpact, Target.transform.position + localOffset, Target.transform.rotation);
 				ShootTime = Random.Range (1, 3);
 			}
 
-			if (Target != null && Target.tag == ("Killed")) {
+			if (Target != null && Target.tag == ("Killed"))
+			{
 				Target = null;
 				ShootTime = Random.Range (1, 3);
 			}
@@ -49,7 +52,8 @@ public class SoldierAI : MonoBehaviour {
 	{
 		if (soldierhealth.SoldierHP >= 0) 
 		{
-			if (Target == null && other.gameObject.tag == ("Zombie") && (Physics.Linecast (transform.position, other.gameObject.transform.position) == false)) {
+			if (Target == null && other.gameObject.tag == ("Zombie") && (Physics.Linecast (transform.position, other.gameObject.transform.position) == false))
+			{
 				Target = other.gameObject;
 			}
 		}
@@ -60,9 +64,21 @@ public class SoldierAI : MonoBehaviour {
 	{
 		if (soldierhealth.SoldierHP >= 0) 
 		{
-			if (Target == null && other.gameObject.tag == ("Zombie") && (Physics.Linecast (transform.position, other.gameObject.transform.position) == false)) 
+			if (Target == null && other.gameObject.tag == ("Zombie") )// && (Physics.Linecast (transform.position, other.gameObject.transform.position) == false)) 
 			{
 				Target = other.gameObject;
+			}
+		}
+
+	}
+
+	void OnTriggerExit (Collider other)
+	{
+		if (soldierhealth.SoldierHP >= 0) 
+		{
+			if (Target != null && other.gameObject.tag == ("Zombie")) 
+			{
+				Target = null;
 			}
 		}
 

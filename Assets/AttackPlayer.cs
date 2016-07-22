@@ -11,7 +11,7 @@ public class AttackPlayer : MonoBehaviour {
 //	public GameObject AttackRange;
 	public GameObject Target;
 
-	private PlayerHealth playerhealth;
+	public PlayerHealth playerhealth;
 	private SoldierHealth soldierhealth;
 
 
@@ -38,25 +38,24 @@ public class AttackPlayer : MonoBehaviour {
 //				Debug.Log ("OFF");
 //			}
 
-			if (InCombat == true) {
+			if (InCombat == true && Target != null) 
+			{
 				AttackTime += Time.deltaTime;
 			}
 
-			if (InCombat == true && AttackTime >= 1.5)
+			if (InCombat == true && AttackTime >= 1.5 && Target != null)
 			{
 				Debug.Log ("HitHIM");
 				anim.SetTrigger ("Attack");
 				AttackTime = 0f;
 
-				if (Target.tag == ("Player"))
+				if (Target != null && Target.tag == ("Player"))
 				{
-					playerhealth = Target.GetComponent<PlayerHealth> ();
 					playerhealth.PlayerHP -= 5;
 				}
 
-				if (Target.tag == ("Soldier"))
+				if (Target != null && Target.tag == ("Soldier"))
 				{
-					soldierhealth = Target.GetComponent<SoldierHealth> ();
 					soldierhealth.SoldierHP -= 5;
 				}
 
@@ -73,6 +72,7 @@ public class AttackPlayer : MonoBehaviour {
 			InCombat = true;
 			agent.enabled = false;
 			Target = other.gameObject;
+			playerhealth = Target.GetComponent<PlayerHealth> ();
 			}
 		}
 
@@ -83,6 +83,7 @@ public class AttackPlayer : MonoBehaviour {
 				InCombat = true;
 				agent.enabled = false;
 				Target = other.gameObject;
+				soldierhealth = Target.GetComponent<SoldierHealth> ();
 			}
 		}
 	}
