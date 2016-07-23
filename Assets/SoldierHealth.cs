@@ -6,9 +6,14 @@ public class SoldierHealth : MonoBehaviour {
 	public float SoldierHP=100f;
 	public bool Fallen;
 
+	NavMeshAgent agent;
+	private SoldierAI soldierai;
+
 	// Use this for initialization
-	void Start () {
-	
+	void Awake () 
+	{
+		soldierai = GetComponentInParent <SoldierAI> ();
+		agent = GetComponentInParent <NavMeshAgent> ();
 	}
 	
 	// Update is called once per frame
@@ -29,5 +34,12 @@ public class SoldierHealth : MonoBehaviour {
 		{
 			SoldierHP -= 5f;
 		}
+
+		if (other.gameObject == soldierai.WayPoint && SoldierHP >= 0)
+			{
+				GetComponentInParent<Animation>().Play("soldierIdle");
+				soldierai.WayPoint = null;
+				agent.enabled = false;
+			}
 	}
 }

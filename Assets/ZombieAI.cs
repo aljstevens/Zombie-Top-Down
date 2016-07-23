@@ -29,13 +29,15 @@ public class ZombieAI : MonoBehaviour {
 		if (enemyhealth.Health <= 0) 
 		{
 			agent.enabled = false;
+			Target = null;
 		}
 
 		if (enemyhealth.Health >= 0)
 		{
 			if (Target != null) 
 			{
-				transform.LookAt (Target.transform);
+				//transform.LookAt (Target.transform);
+				transform.LookAt(new Vector3(Target.transform.position.x, transform.position.y, Target.transform.position.z));
 			}
 
 			if (Target != null && Target.tag == ("Killed")) 

@@ -94,12 +94,14 @@ public class AttackPlayer : MonoBehaviour {
 		{
 			agent.enabled = true;
 			Target = null;
+			anim.SetTrigger ("Walk");
 		}
 
 		if (other.gameObject.tag == ("Soldier") && other.gameObject == zombieai.Target)
 		{
 			agent.enabled = true;
 			Target = null;
+			anim.SetTrigger ("Walk");
 		}
 	}
 
