@@ -4,6 +4,7 @@ using System.Collections;
 public class CharacterMovement : MonoBehaviour {
 
 	Rigidbody rigidBody;
+	public GameObject GM;
 	public float speed = 4;
 	public bool WPress;
 	public bool SPress;
@@ -25,6 +26,7 @@ public class CharacterMovement : MonoBehaviour {
 	{
 		if (playerhealth.PlayerHP  >= 1)
 		{
+
 		if (Input.GetKeyUp (KeyCode.W))
 		{
 			WPress = false;
@@ -69,6 +71,7 @@ public class CharacterMovement : MonoBehaviour {
 		{
 			GetComponent<Animation>().Play("soldierRun");
 			speed = 4f;
+		//	GM.SetActive (false);
 		}
 
 
@@ -76,6 +79,7 @@ public class CharacterMovement : MonoBehaviour {
 		{
 			GetComponent<Animation>().Play("soldierRun");
 			speed = 3f;
+			GM.SetActive (false);
 		}
 
 
@@ -83,6 +87,7 @@ public class CharacterMovement : MonoBehaviour {
 		{
 			speed = 0f;
 			GetComponent<Animation>().Play("soldierIdle");
+			GM.SetActive (true);
 		}
 
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);

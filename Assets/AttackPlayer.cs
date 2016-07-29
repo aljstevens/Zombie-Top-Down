@@ -7,19 +7,20 @@ public class AttackPlayer : MonoBehaviour {
 	NavMeshAgent agent;
 	public GameObject AttackTarget;
 	public bool InCombat;
-	public float AttackTime=1.5f;
+	public float AttackTime;
 //	public GameObject AttackRange;
 	public GameObject Target;
 
+	private bool WalkedUsed;
 	public PlayerHealth playerhealth;
 	private SoldierHealth soldierhealth;
-
+	private CiviHealth civihealth;
 
 	public EnemyHealth enemyhealth;
 	private ZombieAI zombieai;
 
 	// Use this for initialization
-	void Start () 
+	void Awake () 
 	{
 		anim = GetComponentInParent<Animator>();
 		agent = GetComponentInParent <NavMeshAgent> ();
@@ -29,13 +30,35 @@ public class AttackPlayer : MonoBehaviour {
 		
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		if (enemyhealth.Health >= 0) {
 //			if (AttackTime <= 0)
 //			{
 //				AttackRange.SetActive (false);
 //				Debug.Log ("OFF");
+//			}
+
+			if (Target != null && Target.tag == ("Killed")) 
+			{
+				InCombat = false;
+				Target = null;
+
+				if (civihealth != null) 
+				{
+					civihealth = null;
+				}
+
+				if (zombieai.WayPoint != null && WalkedUsed == false) 
+				{
+					zombieai.Walk = true;
+					WalkedUsed = true;
+				}
+			}
+
+//			if (InCombat == true && Target == null) 
+//			{
+//				InCombat = false;
 //			}
 
 			if (InCombat == true && Target != null) 
@@ -51,13 +74,21 @@ public class AttackPlayer : MonoBehaviour {
 
 				if (Target != null && Target.tag == ("Player"))
 				{
-					playerhealth.PlayerHP -= 5;
+					playerhealth.PlayerHP -= 4;
+					Debug.Log ("GOT YOU Player");
 				}
 
-				if (Target != null && Target.tag == ("Soldier"))
+				if (Target != null && Target.tag == ("Soldier") && soldierhealth != null )
 				{
-					soldierhealth.SoldierHP -= 5;
+					soldierhealth.SoldierHP -= 4;
+					Debug.Log ("GOT YOU");
 				}
+
+				if (Target != null && Target.tag == ("Soldier") && civihealth != null)
+				{
+					civihealth.SoldierHP -= 4;
+				}
+					
 
 			}
 		}
@@ -81,9 +112,14 @@ public class AttackPlayer : MonoBehaviour {
 			if (other.gameObject.tag == ("Soldier") && other.gameObject == zombieai.Target)
 			{
 				InCombat = true;
+				WalkedUsed = false;
 				agent.enabled = false;
 				Target = other.gameObject;
 				soldierhealth = Target.GetComponent<SoldierHealth> ();
+				if (soldierhealth == null) 
+				{
+					civihealth = Target.GetComponent<CiviHealth> ();
+				}
 			}
 		}
 	}

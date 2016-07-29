@@ -12,6 +12,9 @@ public class SoldierAI : MonoBehaviour {
 	public GameObject WayPoint;
 	public float AmmoAmount =8;
 	public float ReloadAmountTime =2;
+	public float ShootTimeMin =1;
+	public float ShootTimeMax =3;
+	public GameObject LookAhead;
 
 	private float ReloadTime;
 	private Vector3 localOffset;
@@ -26,6 +29,10 @@ public class SoldierAI : MonoBehaviour {
 		ReloadTime = ReloadAmountTime;
 		Ammo = AmmoAmount;
 
+		if (agent == null) 
+		{
+			agent = null;
+		}
 	}
 	
 	// Update is called once per frame
@@ -34,30 +41,35 @@ public class SoldierAI : MonoBehaviour {
 
 		if (soldierhealth.Fallen == false)
 		{
+//			if (LookAhead != null && Target == null) 
+//			{
+//				transform.LookAt (new Vector3 (LookAhead.transform.position.x, transform.position.y, LookAhead.transform.position.z));
+//			}
+
 			if (Ammo <=0 && ReloadTime <= 0)
 			{
 				ReloadTime = ReloadAmountTime;
 				Ammo = AmmoAmount;
 			}
 
-			if (Target != null && agent.enabled == true)
+			if (Target != null && agent !=null && agent.enabled == true)
 			{
 				GetComponent<Animation>().Play("soldierIdle");
 				agent.enabled = false;
 			}
 
-			if (WayPoint != null && agent.enabled == false)
+			if (WayPoint != null  && agent !=null &&  agent.enabled == false)
 			{
 				agent.enabled = true;
 			}
 
-			if (Target == null && agent.enabled == false)
+			if (Target == null  && agent !=null &&  agent.enabled == false)
 			{
 				agent.enabled = true;
 			}
 				
 
-			if (Target == null && agent.enabled == true && WayPoint !=null) 
+			if (Target == null && agent !=null && agent.enabled == true && WayPoint !=null) 
 			{
 				GetComponent<Animation>().Play("soldierRun");
 				agent.SetDestination (WayPoint.transform.position);
@@ -69,7 +81,7 @@ public class SoldierAI : MonoBehaviour {
 				localOffset = new Vector3 (Random.Range (-1, 1), 0, Random.Range (-1, 1));
 				Instantiate (Flash, Barrel.transform.position, Barrel.transform.rotation);
 				Instantiate (ShootingImpact, Target.transform.position + localOffset, Target.transform.rotation);
-				ShootTime = Random.Range (1, 3);
+				ShootTime = Random.Range (ShootTimeMin, ShootTimeMax);
 			}
 
 			if (Target != null && Target.tag == ("Killed"))

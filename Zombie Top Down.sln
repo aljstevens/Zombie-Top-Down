@@ -1,6 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{0FE33103-9FF1-7F3E-7A53-10BEBC25D715}") = "Zombie Top Down", "Assembly-CSharp-firstpass.csproj", "{B1FEB5CE-18CA-46A3-6212-E07DE03903D1}"
+EndProject
 Project("{0FE33103-9FF1-7F3E-7A53-10BEBC25D715}") = "Zombie Top Down", "Assembly-CSharp.csproj", "{B21F58BC-0C7F-FF19-1CB1-E44D388AA15C}"
 EndProject
 Project("{0FE33103-9FF1-7F3E-7A53-10BEBC25D715}") = "Zombie Top Down", "Assembly-CSharp-Editor.csproj", "{59A8517D-D384-7EF2-068B-D0F137A32759}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1FEB5CE-18CA-46A3-6212-E07DE03903D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1FEB5CE-18CA-46A3-6212-E07DE03903D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1FEB5CE-18CA-46A3-6212-E07DE03903D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1FEB5CE-18CA-46A3-6212-E07DE03903D1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B21F58BC-0C7F-FF19-1CB1-E44D388AA15C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B21F58BC-0C7F-FF19-1CB1-E44D388AA15C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B21F58BC-0C7F-FF19-1CB1-E44D388AA15C}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -6,6 +6,8 @@ public class SoldierHealth : MonoBehaviour {
 	public float SoldierHP=100f;
 	public bool Fallen;
 
+	public float DecayTime =3f;
+
 	NavMeshAgent agent;
 	private SoldierAI soldierai;
 
@@ -17,8 +19,18 @@ public class SoldierHealth : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
+		if (Fallen == true) 
+		{
+			DecayTime -= Time.deltaTime;
+		}
+
+		if (DecayTime <= 0) 
+		{
+			Destroy(transform.parent.gameObject); 
+		}
+
 		if (SoldierHP <= 0 && Fallen == false)
 		{
 			Debug.Log ("Down");
@@ -30,10 +42,10 @@ public class SoldierHealth : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other)
 	{
-		if (other.gameObject.tag == ("AttackRange"))
-		{
-			SoldierHP -= 5f;
-		}
+//		if (other.gameObject.tag == ("AttackRange"))
+//		{
+//			SoldierHP -= 5f;
+//		}
 
 		if (other.gameObject == soldierai.WayPoint && SoldierHP >= 0)
 			{

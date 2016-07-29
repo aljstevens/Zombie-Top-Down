@@ -6,16 +6,19 @@ public class ZombieAI : MonoBehaviour {
 	Animator anim;
 	NavMeshAgent agent;
 	public GameObject Target;
+	public GameObject WayPoint;
 	public bool AttackAnim;
 	public bool Walk;
 	public GameObject OtherZombie;
 	public GameObject ZombieTemp;
 	public GameObject Rally;
+	public bool Idle;
 
+	private bool WalkUsed;
 	private EnemyHealth enemyhealth;
 
 	// Use this for initialization
-	void Start () 
+	void Awake () 
 	{
 		anim = GetComponent<Animator>();
 		agent = GetComponent <NavMeshAgent> ();
@@ -34,6 +37,29 @@ public class ZombieAI : MonoBehaviour {
 
 		if (enemyhealth.Health >= 0)
 		{
+			if (OtherZombie != null && Target != null) 
+			{
+				OtherZombie = null;
+			}
+
+			if (Target == null && WayPoint !=null && agent.enabled == true) 
+			{
+				agent.SetDestination (WayPoint.transform.position);
+
+				if (WalkUsed == false) 
+				{
+					Walk = true;
+					WalkUsed = true;
+				}	
+			}
+
+			if (WayPoint != null && agent.enabled == false && Target == null)
+			{
+				agent.enabled = true;
+				WalkUsed = false;
+			}
+
+
 			if (Target != null) 
 			{
 				//transform.LookAt (Target.transform);
@@ -69,6 +95,12 @@ public class ZombieAI : MonoBehaviour {
 				Walk = false;
 			}	
 
+			if (Idle == true) 
+			{
+				anim.SetTrigger ("Idle");
+				Idle = false;
+			}	
+
 			if (enemyhealth.Health <= 0) 
 			{
 				agent.enabled = false;
@@ -80,12 +112,12 @@ public class ZombieAI : MonoBehaviour {
 	{
 		if (Target != null)
 		{
-			agent.speed += .1f * Time.deltaTime;
+			agent.speed += .5f * Time.deltaTime;
 		}
 
-		if (agent.speed >= 6)
+		if (agent.speed >= 9)
 		{
-			agent.speed = 6;
+			agent.speed = 9;
 		}
 	}
 
@@ -97,6 +129,7 @@ public class ZombieAI : MonoBehaviour {
 		{
 			Target = other.gameObject;
 			Walk = true;
+			agent.enabled = true;
 			Rally.SetActive (true);
 		}
 			if (OtherZombie == null && other.gameObject.tag == ("Rally"))
@@ -113,6 +146,7 @@ public class ZombieAI : MonoBehaviour {
 			{
 				Target = other.gameObject;
 				Walk = true;
+				agent.enabled = true;
 				Rally.SetActive (true);
 			}
 			if (OtherZombie == null && other.gameObject.tag == ("Rally"))
@@ -132,6 +166,7 @@ public class ZombieAI : MonoBehaviour {
 			{
 				Target = other.gameObject;
 				Walk = true;
+				agent.enabled = true;
 			}
 
 		}
@@ -142,6 +177,7 @@ public class ZombieAI : MonoBehaviour {
 			{
 				Target = other.gameObject;
 				Walk = true;
+				agent.enabled = true;
 			}
 
 		}
