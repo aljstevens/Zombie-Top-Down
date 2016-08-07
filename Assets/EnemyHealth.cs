@@ -7,6 +7,7 @@ public class EnemyHealth : MonoBehaviour {
 	Animator anim;
 	NavMeshAgent agent;
 	public bool CountedZombies;
+	public bool Boss;
 	private GameObject CounterObject;
 
 	private float DecayTime=2;
@@ -17,6 +18,7 @@ public class EnemyHealth : MonoBehaviour {
 	private bool CountedUsed;
 	private ZombieAI zombieai;
 
+	public GameObject Boom;
 	BoxCollider boxcollider;
 
 	// Use this for initialization
@@ -77,14 +79,35 @@ public class EnemyHealth : MonoBehaviour {
 	void OnTriggerEnter (Collider other)
 	{
 		{
-			if (other.gameObject.tag == ("Bullet")) {
+			if (other.gameObject.tag == ("Bullet") && Boss == false) 
+			{
 				Debug.Log ("HIT");
 				Destroy (other.gameObject);
 				Health -= 3;
 				Instantiate (blood, gameObject.transform.position, blood.transform.rotation);
 			}
 
-			if (other.gameObject == zombieai.WayPoint && Health >= 0) 
+			if (other.gameObject.tag == ("Barrel") && Boss == true) 
+			{
+				Instantiate (Boom, other.gameObject.transform.position, other.gameObject.transform.rotation);
+				Debug.Log ("HIT");
+				Destroy (other.gameObject);
+				Health -= 1;
+				anim.SetTrigger ("GetHit");
+				Instantiate (blood, gameObject.transform.position, blood.transform.rotation);
+			}
+
+			if (other.gameObject.tag == ("Falling") && Boss == true) 
+			{
+				Instantiate (Boom, other.gameObject.transform.position, other.gameObject.transform.rotation);
+				Debug.Log ("HIT");
+				Destroy (other.gameObject);
+				Health -= 1;
+				anim.SetTrigger ("GetHit");
+				Instantiate (blood, gameObject.transform.position, blood.transform.rotation);
+			}
+
+			if (Boss == false && other.gameObject == zombieai.WayPoint && Health >= 0) 
 			{
 				zombieai.Idle = true;
 				zombieai.WayPoint = null;

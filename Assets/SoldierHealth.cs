@@ -5,6 +5,11 @@ public class SoldierHealth : MonoBehaviour {
 
 	public float SoldierHP=100f;
 	public bool Fallen;
+	public bool StayFallen;
+	public GameObject Zombie;
+
+	private GameObject TransformedSoldier;
+	public GameObject TransformedSoldierHolder;
 
 	public float DecayTime =3f;
 
@@ -21,7 +26,7 @@ public class SoldierHealth : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		if (Fallen == true) 
+		if (Fallen == true && StayFallen == false) 
 		{
 			DecayTime -= Time.deltaTime;
 		}
@@ -52,6 +57,14 @@ public class SoldierHealth : MonoBehaviour {
 				GetComponentInParent<Animation>().Play("soldierIdle");
 				soldierai.WayPoint = null;
 				agent.enabled = false;
+			}
+
+
+			if (other.gameObject.tag == ("Plauge"))
+			{
+			TransformedSoldier = Instantiate (Zombie, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
+			TransformedSoldier.transform.parent = TransformedSoldierHolder.transform;
+			Destroy(transform.parent.gameObject); 
 			}
 	}
 }

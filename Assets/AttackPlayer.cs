@@ -61,7 +61,7 @@ public class AttackPlayer : MonoBehaviour {
 //				InCombat = false;
 //			}
 
-			if (InCombat == true && Target != null) 
+			if (InCombat == true)// && Target != null) 
 			{
 				AttackTime += Time.deltaTime;
 			}

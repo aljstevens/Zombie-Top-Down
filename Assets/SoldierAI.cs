@@ -78,7 +78,7 @@ public class SoldierAI : MonoBehaviour {
 			if (Target != null && ShootTime <= 0  && (Physics.Linecast (transform.position, Target.gameObject.transform.position) == false)) 
 			{
 				Ammo -= 1;
-				localOffset = new Vector3 (Random.Range (-1, 1), 0, Random.Range (-1, 1));
+				localOffset = new Vector3 (Random.Range (-0.5f, 0.5f), 0, Random.Range (-0.5f, 0.5f));
 				Instantiate (Flash, Barrel.transform.position, Barrel.transform.rotation);
 				Instantiate (ShootingImpact, Target.transform.position + localOffset, Target.transform.rotation);
 				ShootTime = Random.Range (ShootTimeMin, ShootTimeMax);

@@ -5,6 +5,7 @@ public class LoadNewArea : MonoBehaviour {
 
 	public GameObject LoadedArea;
 	public GameObject NextArea;
+	public GameObject TeamAhead;
 
 	private GameObject TempArea;
 
@@ -22,13 +23,17 @@ public class LoadNewArea : MonoBehaviour {
 	{
 		if (other.gameObject.tag == ("Player")) 
 		{
-			LoadedArea.SetActive (false);
-			NextArea.SetActive (true);
-			//TempArea = LoadedArea;
-			//LoadedArea = NextArea;
-			//NextArea = TempArea;
-			//TempArea = null;
+			if (LoadedArea != null && NextArea != null)
+			{
+				LoadedArea.SetActive (false);
+				NextArea.SetActive (true);
+			}
+		}
 
+		if (other.gameObject.tag == ("Player") && TeamAhead != null) 
+		{
+			TeamAhead.SetActive (true);
+			TeamAhead = null;
 		}
 
 	}

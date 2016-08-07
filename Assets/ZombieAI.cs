@@ -13,13 +13,18 @@ public class ZombieAI : MonoBehaviour {
 	public GameObject ZombieTemp;
 	public GameObject Rally;
 	public bool Idle;
+	public GameObject CurrentHolder;
 
+	private GameObject CombatHolder;
+	private bool PlayerTargeted;
 	private bool WalkUsed;
 	private EnemyHealth enemyhealth;
+	private bool NoParent;
 
 	// Use this for initialization
 	void Awake () 
 	{
+		CombatHolder = GameObject.FindWithTag ("CombatWithPlayer");
 		anim = GetComponent<Animator>();
 		agent = GetComponent <NavMeshAgent> ();
 		enemyhealth = GetComponentInChildren <EnemyHealth> ();
@@ -29,6 +34,11 @@ public class ZombieAI : MonoBehaviour {
 	void Update () 
 	{
 
+		if (CurrentHolder == null && NoParent == false)
+		{
+			CurrentHolder = transform.parent.gameObject;
+		}
+
 		if (enemyhealth.Health <= 0) 
 		{
 			agent.enabled = false;
@@ -37,6 +47,18 @@ public class ZombieAI : MonoBehaviour {
 
 		if (enemyhealth.Health >= 0)
 		{
+			if (Target != null && Target.tag == ("Player") && PlayerTargeted == false) 
+			{
+				gameObject.transform.parent = CombatHolder.transform;
+				PlayerTargeted = true;
+			}
+
+			if (Target == null && PlayerTargeted == true) 
+			{
+				gameObject.transform.parent = CurrentHolder.transform;
+				PlayerTargeted = false;
+			}
+
 			if (OtherZombie != null && Target != null) 
 			{
 				OtherZombie = null;

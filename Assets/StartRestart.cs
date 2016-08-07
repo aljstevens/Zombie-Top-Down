@@ -8,10 +8,13 @@ public class StartRestart : MonoBehaviour {
 
 	public GameObject OfflineTurrets;
 	public GameObject OnlineTurrets;
+	public GameObject ZombieSpawn;
 	public GameObject Spawner;
 	public GameObject Spawner2;
 	public GameObject Engineer;
 	public float Timer =120f;
+	public GameObject RestartComputer;
+	public GameObject TimerImage;
 
 	// Use this for initialization
 	void Start () {
@@ -43,6 +46,7 @@ public class StartRestart : MonoBehaviour {
 			Destroy (Spawner2);
 			OfflineTurrets.SetActive (false);
 			OnlineTurrets.SetActive (true);
+			Destroy (ZombieSpawn);
 			Destroy (gameObject);
 		}
 
@@ -59,6 +63,19 @@ public class StartRestart : MonoBehaviour {
 		if (other.gameObject.tag == ("Player")) 
 		{
 			InRange = true;
+			RestartComputer.SetActive (true);
+			TimerImage.SetActive (true);
+		}
+
+	}
+
+	void OnTriggerExit (Collider other)
+	{
+		if (other.gameObject.tag == ("Player")) 
+		{
+			InRange = false;
+			RestartComputer.SetActive (false);
+			TimerImage.SetActive (false);
 		}
 
 	}

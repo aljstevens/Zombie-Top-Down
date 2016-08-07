@@ -8,6 +8,7 @@ public class OrderTroops : MonoBehaviour {
 
 	public GameObject WaitingTeam;
 	public GameObject OrderedTeam;
+	public GameObject OrderImage;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,7 @@ public class OrderTroops : MonoBehaviour {
 			WaitingTeam.SetActive (false);
 			OrderedTeam.SetActive (true);
 			Used = true;
+			Destroy (OrderImage);
 			Destroy (gameObject);
 		}
 	}
@@ -31,6 +33,17 @@ public class OrderTroops : MonoBehaviour {
 		if (other.gameObject.tag == ("Player")) 
 		{
 			InRange = true;
+			OrderImage.SetActive (true);
+		}
+
+	}
+
+	void OnTriggerExit (Collider other)
+	{
+		if (other.gameObject.tag == ("Player")) 
+		{
+			InRange = false;
+			OrderImage.SetActive (false);
 		}
 
 	}

@@ -10,6 +10,7 @@ public class CiviAI : MonoBehaviour {
 	public bool IdleAnim;
 	public bool RunAnim;
 	public GameObject Health;
+	public GameObject OrderToRunImage;
 
 	private bool Used;
 	private GameObject WayPoint;
@@ -35,6 +36,7 @@ public class CiviAI : MonoBehaviour {
 			RunAnim = true;
 			Health.SetActive (true);
 			Used = true;
+			OrderToRunImage.SetActive (false);
 		}
 
 		if (IdleAnim == true) 
@@ -52,9 +54,20 @@ public class CiviAI : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other)
 	{
-		if (other.gameObject.tag == ("Player")) 
+		if (other.gameObject.tag == ("Player") && Used == false) 
 		{
 			InRange = true;
+			OrderToRunImage.SetActive (true);
+		}
+
+	}
+
+	void OnTriggerExit (Collider other)
+	{
+		if (other.gameObject.tag == ("Player") && Used == false) 
+		{
+			InRange = false;
+			OrderToRunImage.SetActive (false);
 		}
 
 	}

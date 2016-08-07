@@ -54,5 +54,11 @@ public class Shot : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
+		if (other.gameObject.tag == ("Terrain")) 
+		{
+			Instantiate (ShotFired, gameObject.transform.position, ShotFired.transform.rotation);
+			Destroy (gameObject);
+		}
+
 	}
 }
